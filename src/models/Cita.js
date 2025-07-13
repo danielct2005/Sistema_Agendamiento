@@ -1,36 +1,40 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Paciente = require('./Paciente');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
+const Paciente = require("./Paciente");
 
-const Cita = sequelize.define('Cita', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+const Cita = sequelize.define(
+  "Cita",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    fechaHora: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    motivo: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    pacienteId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Pacientes",
+        key: "id",
+      },
+    },
   },
-  fecha: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  hora: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  descripcion: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  pacienteId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Paciente,
-      key: 'id',
-    },
-  },
-});
+  {
+    tableName: "Cita",
+    timestamps: false,
+  }
+);
 
-Paciente.hasMany(Cita, { foreignKey: 'pacienteId' });
-Cita.belongsTo(Paciente, { foreignKey: 'pacienteId' });
+// Definir relaciones entre tablas
+Paciente.hasMany(Cita, { foreignKey: "pacienteId" });
+Cita.belongsTo(Paciente, { foreignKey: "pacienteId" });
 
-module.exports = Cita;
+module.exports = Cita;
