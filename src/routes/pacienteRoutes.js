@@ -12,6 +12,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Buscar paciente por RUT
+router.get("/buscar/:rut", async (req, res) => {
+  const { rut } = req.params;
+
+  try {
+    const paciente = await Paciente.findOne({ where: { rut } });
+
+    if (!paciente) {
+      return res.status(404).json({ message: "Paciente no encontrado" });
+    }
+
+    res.json(paciente);
+  } catch (error) {
+    console.error("Error buscando paciente por RUT:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+});
+
 // Crear paciente
 router.post("/", async (req, res) => {
   try {
