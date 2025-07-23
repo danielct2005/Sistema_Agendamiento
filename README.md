@@ -42,8 +42,8 @@ SISTEMA_AGENDAMIENTO/
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/sistema-agendamiento.git
-cd sistema-agendamiento
+git clone https://github.com/danielct2005/Sistema_Agendamiento_Backend.git
+cd Sistema_Agendamiento
 ```
 
 ### 2. Instala las dependencias
