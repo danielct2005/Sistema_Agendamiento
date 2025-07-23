@@ -4,6 +4,7 @@ const cors = require("cors");
 const sequelize = require("./src/config/database");
 const pacienteRoutes = require("./src/routes/pacienteRoutes");
 const citaRoutes = require("./src/routes/citaRoutes");
+const medicoRoutes = require("./src/routes/medicoRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 // Rutas
 app.use("/api/pacientes", pacienteRoutes);
 app.use("/api/citas", citaRoutes);
+app.use("/api/medicos", medicoRoutes);
 
 // Ruta básica de prueba
 app.get("/", (req, res) => {
@@ -37,7 +39,7 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("✅ Conexión a la base de datos establecida correctamente");
-    return sequelize.sync({ alter: true }); // <- sincroniza tablas con modelos
+    return sequelize.sync({ alter: true }); // sincroniza tablas con modelos
   })
   .then(() => {
     console.log("✅ Modelos sincronizados con la base de datos");

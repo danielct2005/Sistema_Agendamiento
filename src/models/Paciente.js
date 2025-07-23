@@ -21,6 +21,20 @@ const Paciente = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    rut: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    direccion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    sexo: {
+      type: DataTypes.ENUM("M", "F", "O"),
+      allowNull: false,
+      defaultValue: "O",
+    },
   },
   {
     tableName: "Pacientes",

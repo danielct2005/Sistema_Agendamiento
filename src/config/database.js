@@ -1,13 +1,18 @@
 const { Sequelize } = require("sequelize");
+const config = require("./config"); // Ajusta ruta según estructura
 require("dotenv").config();
 
+const env = process.env.NODE_ENV || "development";
+const envConfig = config[env];
+
+// Crear instancia Sequelize usando config de CLI
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  envConfig.database,
+  envConfig.username,
+  envConfig.password,
   {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    host: envConfig.host,
+    dialect: envConfig.dialect,
     logging: false,
   }
 );
